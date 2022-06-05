@@ -19,6 +19,8 @@ struct Journal
     void add(const string& entry);
 
     // persistence is a separate concern
+    // As we decide to implement database or etc, it will require us to modify all the persistent code
+    // Thus it is better to have them in seperate PersistenceManager class.
     void save(const string& filename);
 };
 

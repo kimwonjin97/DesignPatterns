@@ -20,6 +20,7 @@ struct Product
 struct ProductFilter
 {
     typedef vector<Product*> Items;
+    // This doesn't scale
 
     Items by_color(Items items, const Color color)
     {
