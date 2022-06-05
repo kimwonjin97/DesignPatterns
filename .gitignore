@@ -1,3 +1,5 @@
 CMakeLists.txt
 build
 main.cpp
+
+.idea
