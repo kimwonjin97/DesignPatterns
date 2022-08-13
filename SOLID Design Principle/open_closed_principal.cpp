@@ -2,6 +2,8 @@
 
 // open for extension, closed for modification
 
+//avoid jumping into code that is already written
+
 #include <string>
 #include <vector>
 #include <iostream>

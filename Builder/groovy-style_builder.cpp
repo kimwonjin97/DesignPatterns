@@ -55,7 +55,7 @@ namespace html {
     struct P : Tag
     {
         explicit P(const std::string& text)
-                : Tag{"p", text}
+                : Tag("p", text)
         {
         }
 

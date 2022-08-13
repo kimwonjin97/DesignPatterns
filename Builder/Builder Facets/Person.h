@@ -11,7 +11,7 @@ class Person
 
   // employment
   std::string company_name, position;
-  int annual_income = 0;
+  int annual_income{0};
 
   Person()
   {
