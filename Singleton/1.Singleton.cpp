@@ -1,4 +1,5 @@
 #pragma once
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -36,6 +37,7 @@ public:
 	//static int instance_count;
 
 	SingletonDatabase(SingletonDatabase const&) = delete;
+
 	void operator=(SingletonDatabase const&) = delete;
 
 	static SingletonDatabase& get()
@@ -74,7 +76,8 @@ public:
 		capitals["gamma"] = 3;
 	}
 
-	int get_population(const std::string& name) override {
+	int get_population(const std::string& name) override
+	{
 		return capitals[name];
 	}
 };
@@ -84,7 +87,7 @@ struct SingletonRecordFinder
 	int total_population(std::vector<std::string> names)
 	{
 		int result = 0;
-		for (auto& name : names)
+		for (auto& name: names)
 			result += SingletonDatabase::get().get_population(name);
 		return result;
 	}
@@ -93,14 +96,14 @@ struct SingletonRecordFinder
 struct ConfigurableRecordFinder
 {
 	explicit ConfigurableRecordFinder(Database& db)
-			: db{db}
+			: db{ db }
 	{
 	}
 
 	int total_population(std::vector<std::string> names) const
 	{
 		int result = 0;
-		for (auto& name : names)
+		for (auto& name: names)
 			result += db.get_population(name);
 		return result;
 	}
