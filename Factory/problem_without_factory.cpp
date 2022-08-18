@@ -7,12 +7,13 @@
 #include <sstream>
 #include <memory>
 #include <cmath>
+
 using namespace std;
 
 enum class PointType
 {
-    cartesian,
-    polar
+	cartesian,
+	polar
 };
 
 struct Point
@@ -23,21 +24,23 @@ struct Point
 
 
 // even though documented well its not easy to figure out what a and b actually are.
-    //!
-    //! \param a this is either x or rho
-    //! \param b this is either y or theta
-    //! \param type
-    Point(float a, float b, PointType type = PointType::cartesian)
-    {
-        if(type == PointType::cartesian)
-        {
-            x = a;
-            y = b;
-        } else {
-            x = a * cos(b);
-            y = a * sin(b);
-        }
-    }
+	//!
+	//! \param a this is either x or rho
+	//! \param b this is either y or theta
+	//! \param type
+	Point(float a, float b, PointType type = PointType::cartesian)
+	{
+		if (type == PointType::cartesian)
+		{
+			x = a;
+			y = b;
+		}
+		else
+		{
+			x = a * cos(b);
+			y = a * sin(b);
+		}
+	}
 
-    float x, y;
+	float x, y;
 };

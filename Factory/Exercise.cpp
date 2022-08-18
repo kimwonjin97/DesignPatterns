@@ -1,9 +1,11 @@
 #include <vector>
 #include <string>
 #include <gtest/gtest.h>
+
 using namespace std;
 
-namespace FactoryExercise {
+namespace FactoryExercise
+{
 
 	struct Person
 	{
@@ -34,7 +36,8 @@ namespace FactoryExercise {
 		{
 		};
 
-		TEST_F(Evaluate, SimplePersonTest)
+		TEST_F(Evaluate, SimplePersonTest
+		)
 	{
 		PersonFactory pf;
 

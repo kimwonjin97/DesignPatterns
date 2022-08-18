@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 #include <algorithm>
+
 using namespace std;
 
 struct BankAccount
@@ -33,7 +34,9 @@ struct BankAccount
 struct Command
 {
 	bool succeeded;
+
 	virtual void call() = 0;
+
 	virtual void undo() = 0;
 };
 
@@ -41,7 +44,10 @@ struct Command
 struct BankAccountCommand : Command
 {
 	BankAccount& account;
-	enum Action { deposit, withdraw } action;
+	enum Action
+	{
+		deposit, withdraw
+	} action;
 	int amount;
 
 	BankAccountCommand(BankAccount& account, const Action action,
@@ -93,7 +99,7 @@ struct CompositeBankAccountCommand : vector<BankAccountCommand>, Command
 
 	void call() override
 	{
-		for (auto& cmd : *this)
+		for (auto& cmd: *this)
 			cmd.call();
 	}
 
@@ -108,12 +114,14 @@ struct DependentCompositeCommand : CompositeBankAccountCommand
 {
 	explicit DependentCompositeCommand(
 			const initializer_list<value_type>& _Ilist)
-			: CompositeBankAccountCommand{ _Ilist } {}
+			: CompositeBankAccountCommand{ _Ilist }
+	{
+	}
 
 	void call() override
 	{
 		bool ok = true;
-		for (auto& cmd : *this)
+		for (auto& cmd: *this)
 		{
 			if (ok)
 			{
@@ -131,12 +139,14 @@ struct DependentCompositeCommand : CompositeBankAccountCommand
 struct MoneyTransferCommand : DependentCompositeCommand
 {
 	MoneyTransferCommand(BankAccount& from,
-			BankAccount& to, int amount):
+			BankAccount& to, int amount) :
 			DependentCompositeCommand
 					{
-							BankAccountCommand{from, BankAccountCommand::withdraw, amount},
-							BankAccountCommand{to, BankAccountCommand::deposit, amount}
-					} {}
+							BankAccountCommand{ from, BankAccountCommand::withdraw, amount },
+							BankAccountCommand{ to, BankAccountCommand::deposit, amount }
+					}
+	{
+	}
 };
 
 

@@ -23,19 +23,25 @@ class Point
 	}*/
 
 	// use a factory method
-	Point(float x, float y) : x(x), y(y) {}
+	Point(float x, float y) : x(x), y(y)
+	{
+	}
 
 	class PointFactory
 	{
-		PointFactory() {}
+		PointFactory()
+		{
+		}
+
 	public:
 		static Point NewCartesian(float x, float y)
 		{
-			return { x,y };
+			return { x, y };
 		}
+
 		static Point NewPolar(float r, float theta)
 		{
-			return{ r*cos(theta), r*sin(theta) };
+			return { r * cos(theta), r * sin(theta) };
 		}
 	};
 

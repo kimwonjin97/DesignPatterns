@@ -4,60 +4,61 @@
 #include <vector>
 //#include <boost>
 #include <boost/lexical_cast.hpp>
+
 using namespace std;
 
 struct Journal
 {
-    string title;
-    vector<string> entries;
+	string title;
+	vector<string> entries;
 
-    explicit Journal(const string& title)
-            : title{title}
-    {
-    }
+	explicit Journal(const string& title)
+			: title{ title }
+	{
+	}
 
-    void add(const string& entry);
+	void add(const string& entry);
 
-    // persistence is a separate concern
-    // As we decide to implement database or etc, it will require us to modify all the persistent code
-    // Thus it is better to have them in seperate PersistenceManager class.
-    void save(const string& filename);
+	// persistence is a separate concern
+	// As we decide to implement database or etc, it will require us to modify all the persistent code
+	// Thus it is better to have them in seperate PersistenceManager class.
+	void save(const string& filename);
 };
 
 void Journal::add(const string& entry)
 {
-    static int count = 1;
-    entries.push_back(boost::lexical_cast<string>(count++)
-                      + ": " + entry);
+	static int count = 1;
+	entries.push_back(boost::lexical_cast<string>(count++)
+					  + ": " + entry);
 }
 
 void Journal::save(const string& filename)
 {
-    ofstream ofs(filename);
-    for (auto& s : entries)
-        ofs << s << endl;
+	ofstream ofs(filename);
+	for (auto& s: entries)
+		ofs << s << endl;
 }
 
 struct PersistenceManager
 {
-    static void save(const Journal& j, const string& filename)
-    {
-        ofstream ofs(filename);
-        for (auto& s : j.entries)
-            ofs << s << endl;
-    }
+	static void save(const Journal& j, const string& filename)
+	{
+		ofstream ofs(filename);
+		for (auto& s: j.entries)
+			ofs << s << endl;
+	}
 };
 
 int main()
 {
-    Journal journal{"Dear Diary"};
-    journal.add("I ate a bug");
-    journal.add("I cried today");
+	Journal journal{ "Dear Diary" };
+	journal.add("I ate a bug");
+	journal.add("I cried today");
 
-    //journal.save("diary.txt");
+	//journal.save("diary.txt");
 
-    PersistenceManager pm;
-    pm.save(journal, "diary.txt");
+	PersistenceManager pm;
+	pm.save(journal, "diary.txt");
 }
 
 
