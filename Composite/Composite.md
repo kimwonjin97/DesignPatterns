@@ -7,3 +7,12 @@
    1. I.e, Foo and Collection<Foo> have common APIs.
 
 Composite-> A mechanism for treating individual(scalar) objects and compositions of objects in a uniform manner.
+
+## Summary
+1. Objects can use other objects via inheritance/composition
+2. Some composed and singular objects need similar/identical behaviors
+3. Composite design pattern lets us treat both types of obejcts uniformly
+4. C++ uses duck typing, expecting enumerable types to provide begin()/end()
+5. A single object can masquerade as a collection
+   1. Foo* begin() { return this; }
+   2. Foo* end() {return this+1;}
