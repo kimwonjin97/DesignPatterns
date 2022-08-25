@@ -4,7 +4,9 @@
 #include <functional>
 #include <sstream>
 #include "Person.h"
+
 using namespace std;
+
 #include <boost/serialization/serialization.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
@@ -17,9 +19,9 @@ struct Address
 
 
 	Address(const string& street, const string& city, const int suite)
-			: street{street},
-			  city{city},
-			  suite{suite}
+			: street{ street },
+			  city{ city },
+			  suite{ suite }
 	{
 	}
 
@@ -55,16 +57,17 @@ struct Contact
 	}
 
 	Contact() : name(nullptr), address(nullptr)
-	{} // required for serialization
+	{
+	} // required for serialization
 
 	Contact(string name, Address* address)
-			: name{name}, address{address}
+			: name{ name }, address{ address }
 	{
 		//this->address = new Address{ *address };
 	}
 
 	Contact(const Contact& other)
-			: name{other.name}
+			: name{ other.name }
 	//, address{ new Address{*other.address} }
 	{
 		address = new Address(
@@ -78,14 +81,14 @@ struct Contact
 private:
 	friend class boost::serialization::access;
 
-	template <class archive>
+	template<class archive>
 	void save(archive& ar, const unsigned version) const
 	{
 		ar << name;
 		ar << address;
 	}
 
-	template <class archive>
+	template<class archive>
 	void load(archive& ar, const unsigned version)
 	{
 		ar >> name;

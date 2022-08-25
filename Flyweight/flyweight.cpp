@@ -1,11 +1,13 @@
 #include <iostream>
 #include <string>
 #include <cstdint>
+
 using namespace std;
 
 #include <boost/bimap.hpp>
 #include <boost/flyweight.hpp>
 #include <boost/flyweight/key_value.hpp>
+
 using namespace boost;
 using namespace flyweights;
 
@@ -20,7 +22,7 @@ typedef uint32_t key;
 struct User
 {
 	User(const string& first_name, const string& last_name)
-			: first_name{add(first_name)}, last_name{add(last_name)}
+			: first_name{ add(first_name) }, last_name{ add(last_name) }
 	{
 	}
 
@@ -36,7 +38,7 @@ struct User
 
 	static void info()
 	{
-		for (auto entry : names.left)
+		for (auto entry: names.left)
 		{
 			cout << "Key: " << entry.first << ", Value: " << entry.second << endl;
 		}
@@ -65,6 +67,7 @@ protected:
 		}
 		return it->second;
 	}
+
 	key first_name, last_name;
 };
 
@@ -100,7 +103,7 @@ void boost_flyweight()
 	User2 jane_doe{ "Jane", "Doe" };
 
 
-	cout << boolalpha <<  (&jane_doe.last_name.get() == &john_doe.last_name.get());
+	cout << boolalpha << (&jane_doe.last_name.get() == &john_doe.last_name.get());
 	//cout << (&jane_doe.last_name == &john_doe.last_name);
 }
 

@@ -2,14 +2,18 @@ struct Point
 {
 	int x{ 0 }, y{ 0 };
 
-	Point(){}
+	Point()
+	{
+	}
 
-	Point(const int x, const int y) : x{x}, y{y} {}
+	Point(const int x, const int y) : x{ x }, y{ y }
+	{
+	}
 };
 
 struct Line
 {
-	Point *start, *end;
+	Point* start, * end;
 
 	Line(Point* const start, Point* const end)
 			: start(start), end(end)
@@ -44,16 +48,18 @@ namespace
 	{
 	};
 
-	TEST_F(Evaluate, SimpleTest)
+	TEST_F(Evaluate, SimpleTest
+	)
 {
 	Line line1{
-			new Point{3,3},
-			new Point{10,10}
+			new Point{ 3, 3 },
+			new Point{ 10, 10 }
 	};
 
 	auto line2 = line1.deep_copy();
-	line1.start->x = line1.start->y =
-					 line1.end->y = line1.end->y = 0;
+	line1.start->
+	x = line1.start->y =
+		line1.end->y = line1.end->y = 0;
 
 	ASSERT_EQ(3, line2.start->x);
 	ASSERT_EQ(3, line2.start->y);

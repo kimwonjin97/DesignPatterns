@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+
 using namespace std;
 
 class Memento
@@ -12,7 +13,9 @@ public:
 			: balance(balance)
 	{
 	}
+
 	friend class BankAccount;
+
 	friend class BankAccount2;
 };
 
@@ -83,7 +86,7 @@ public:
 			balance = m->balance;
 			return m;
 		}
-		return{};
+		return {};
 	}
 
 	shared_ptr<Memento> redo()
@@ -95,7 +98,7 @@ public:
 			balance = m->balance;
 			return m;
 		}
-		return{};
+		return {};
 	}
 
 	friend ostream& operator<<(ostream& os, const BankAccount2& obj)
